@@ -1,0 +1,21 @@
+extends ../layout/index
+
+block content
+  h2 Iniciar Sesión
+
+  form(action="/login", method="post")
+    label(for="username") Nombre de usuario:
+    input(type="text", name="username", required)
+
+    label(for="password") Contraseña:
+    input(type="password", name="password", required)
+
+    input(type="submit", value="Iniciar Sesión")
+
+  hr
+
+  p ¿No tienes una cuenta?
+  a(href="/user/register") Registro de Usuario
+
+  p ¿Eres administrador?
+  a(href="/admin/register") Registro de Administrador

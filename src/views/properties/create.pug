@@ -1,0 +1,60 @@
+extends ../layout/index
+block content
+    div.py-5
+        h2.text-center.text-2xl.font-extrabold =page
+        .bg-white.shadow.py-8.px-4.rounded-xl.mx-auto.max-w-4xl.my-10(class="md:px-10")
+            form.space-y-8.(action="")
+                .space-y-8 
+                    h3.text-lg.leading-6.text-gray-900.font-medium.font-bold Property general information
+                    p.text-gray-600 Please carefully type the specific data about the property that you want to offer
+                div(class="md:flex md:gap-4")
+                    div(class="md:w-1/2")
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="title") Title of announcement
+                        input#title.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="text" name="title" placeholder="ex. Two floor house") 
+                    
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="category") Title of category
+                        select#category.w-full.py-2.border.border-gray-300.rounded(name="category")
+                            option(value="" selected="selected") --SELECT CATEGORY-- 
+                            option(value="apartment") Apartment 
+                            option(value="house") House 
+                            option(value="landfield") Landfield 
+                            option(value="warehouse") Warehouse
+                    div(class="md:w-1/2")
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="priceRnage") Price range
+                        select#priceRange.w-full.py-2.border.border-gray-300.rounded(name="priceRange")
+                            option(value="" selected="selected") --SELECT PRICE--
+                            option(value="1") $100,000-$150,000 
+                            option(value="2") $151,000-$200,000
+                            option(value="3") +$200,000
+                
+                div(class="md:flex md:gap-4")
+                    div(class="md:w-1/3")
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="nRooms") Number of Rooms
+                        select#nRooms.w-full.py-2.border.border-gray-300.rounded(name="nRooms")
+                            option(value selected disabled) --SELECT NUMBER--
+                            option(value="0") NA
+                            -let x=1;
+                                while x<=10 
+                                    option(value=x) #{x++}
+
+                    div(class="md:w-1/3")
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="nwc") Number of BathRooms
+                        select#nwc.w-full.py-2.border.border-gray-300.rounded(name="nwc")
+                            option(value selected disabled) --SELECT NUMBER--
+                            option(value="0") NA
+                            -let n=1;
+                                while n<=5
+                                    option(value=n) #{n++}
+                    div(class="md:w-1/3")
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="parkinglot") Parking lot
+                        select#parkinglot.w-full.py-2.border.border-gray-300.rounded(name="parkinglot")
+                            option(value selected disabled) --SELECT NUMBER--
+                            option(value="0") NA
+                            -let m=1;
+                                while m<=5
+                                    option(value=m) #{m++}
+
+                input#btn-save.w-full.bg-cyan-500.text-white(class="text-gray-800 font-bold py-3 cursor-pointer bg-blue-200 rounded-xl hover:bg-cyan-600 hover:text-white" type="submit" value="Save" required)
+
+                        
+                        
