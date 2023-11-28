@@ -27,10 +27,11 @@ const user = db.define('tbb_users', {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
-  last_login: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
+  type: {
+    type: DataTypes.ENUM('user', 'admin'),
+    defaultValue: 'user',
+    
+  }
 }, {
   hooks: {
     beforeCreate: async (user) => {

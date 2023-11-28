@@ -5,6 +5,8 @@ import bcrypt from 'bcrypt';
 import { emailRegister, emailPasswordRecovery } from "../lib/emails.js";
 
 
+
+
 const formLogin = (request, response) => {
 
     response.render("../views/auth/login.pug", {
@@ -37,7 +39,7 @@ const formPasswordUpdate = async (request, response) => {
 
 const formRegister = (request, response) => {
 
-    response.render("auth/register.pug", {
+    response.render("auth/userRegister.pug", {
         page: "Creating a new account...",
 
     })
@@ -84,8 +86,7 @@ const insertUser = async (req, res) => {
 
 
         }))
-    }
-    else if (resultValidate.isEmpty()) {
+    }else if (resultValidate.isEmpty()) {
         const token = generateToken();
         //*Creando usuario */
 
@@ -104,9 +105,10 @@ const insertUser = async (req, res) => {
     }
 
     else {
-        res.render("auth/register.pug", ({
+        res.render("auth/userRegister.pug", ({
             page: "New account",
-            errors: resultValidate.array(), user: {
+            errors: resultValidate.array(),
+            user: {
                 name: req.body.name,
                 email: req.body.email
             },
@@ -245,107 +247,17 @@ const emailChangePassword = async (req, res) => {
     return 0;
 }
 
-process.env.TZ = 'America/Mexico_City';
-
-
-const authenticateUser = async (request, response) => {
-    try {
-        // Verificar los campos de correo y contraseña
-        await check("email").notEmpty().withMessage("Email field is required").isEmail().withMessage("This is not in email format").run(request);
-        await check("password").notEmpty().withMessage("Password field is required").isLength({ max: 20, min: 8 }).withMessage("Password must contain between 8 and 20 characters").run(request);
-
-        // En caso de errores, mostrarlos en pantalla
-        let resultValidation = validationResult(request);
-        if (resultValidation.isEmpty()) {
-            const { email, password } = request.body;
-            console.log(`El usuario: ${email} está intentando acceder a la plataforma`);
-
-            const userExists = await User.findOne({ where: { email } });
-
-            if (!userExists) {
-                console.log("El usuario no existe");
-                response.render("auth/login.pug", {
-                    page: "Login",
-                    errors: [{ msg: `The user associated to: ${email} was not found` }],
-                    user: {
-                        email
-                    }
-                });
-            } else {
-                console.log("El usuario existe");
-                if (!userExists.verified) {
-                    console.log("Existe, pero no está verificado");
-
-                    response.render("auth/login.pug", {
-                        page: "Login",
-                        errors: [{ msg: `The user associated to: ${email} was found but not verified` }],
-                        user: {
-                            email
-                        }
-                    });
-                } else {
-                    if (!userExists.verifyPassword(password)) {
-                        response.render("auth/login.pug", {
-                            page: "Login",
-                            errors: [{ msg: `User and password do not match` }],
-                            user: {
-                                email
-                            }
-                        });
-                    } else {
-                        console.log(`El usuario: ${email} Existe y está autenticado`);
-
-                        // Obtén la fecha de last_login (si existe) o crea una nueva
-                        let lastLoginDate = userExists.last_login || new Date();
-
-                        // Calcula la diferencia en días entre la fecha actual y la fecha del último inicio de sesión
-                        const currentDate = new Date();
-                        currentDate.setHours(currentDate.getHours() - 6); // Restar 6 horas
-
-                        const timeDifference = currentDate - lastLoginDate;
-                        const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-                        // Determina el mensaje en función de la diferencia de días
-                        let message = "Bienvenido";
-                        if (daysDifference >= 7 && daysDifference < 30) {
-                            message = "Bienvenido de vuelta";
-                        } else if (daysDifference >= 30) {
-                            message = "Qué bueno tenerte de vuelta después de tanto tiempo!!!!😊";
-                        }
-
-                        // Actualiza la fecha del último inicio de sesión
-                        userExists.last_login = currentDate;
-                        userExists.save();
-
-                        // Renderiza el archivo .pug de bienvenida y pasa el mensaje
-                        response.render("user/home.pug", {
-                            message,
-                            // ... otros datos que quieras pasar al archivo .pug
-                        });
-                    }
-                }
-            }
-        } else {
-            response.render("auth/login.pug", {
-                page: "Login",
-                errors: resultValidation.array(),
-                user: {
-                    email: request.body.email
-                }
-            });
-        }
-    } catch (error) {
-        console.error(error);
-        // Manejo de errores
-    }
-};
 
 
 
 
-const userHome = (req, res) => {
-    res.render('user/home',{showHeader:true})
-}
 
 
-export {formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, authenticateUser, confirmAccount, updatePassword, emailChangePassword, userHome};
+// const publicHome = (req, res) => {
+    
+//       res.render('templates/publicHome.pug');
+    
+//   }
+
+
+export { formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};

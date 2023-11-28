@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Proyecto desarrollado con Node, Express, Sequelize y Pug",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "server": "nodemon src/server.js",
-    "css": "postcss src/public/css/tailwind.css -o src/public/css/app.css --watch"  },
+    "css": "postcss src/public/css/tailwind.css -o src/public/css/app.css --watch",
+    "db:importData": "node ./src/lib/seeders/startSeed.js -i"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BraytoGBDX/Motel_API.git"
@@ -36,6 +38,7 @@
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
+    "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",

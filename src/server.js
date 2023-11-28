@@ -1,11 +1,15 @@
 import express, { urlencoded } from 'express';
-import adminRoutes from './routes/adminRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import publicRoutes from './routes/publicRoutes.js'
 import db from './config/db.js';
 import helmet from 'helmet'; 
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 // import propertyRoutes from './routes/propertyRoutes.js'
+
+
+
 
 dotenv.config({
     path:'src/.env'
@@ -18,9 +22,15 @@ app.use(express.urlencoded({
 }));
 
 // HABILITAR COOKIEPARSER PARA LEER, ESCRIBIR Y ELIMINAR EN LAS COOKIES DEL NAVEGADOR.
-app.use(cookieParser({
-    cookie:true
-}))
+const secretKey = 'tu_clave_secreta_aqui'; // Cambia esto por una clave segura
+app.use(cookieParser(secretKey));
+
+app.use(session({
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: true,
+}));
+
 
 //TEMPLATE ENGINE
 app.set('view engine', 'pug');
@@ -45,5 +55,5 @@ catch{
     
 }
 
-app.use('/admin', adminRoutes);
 app.use('/user', userRoutes);
+app.use('/', publicRoutes)
