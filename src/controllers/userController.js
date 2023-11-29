@@ -248,6 +248,13 @@ const emailChangePassword = async (req, res) => {
 }
 
 
+const userHome=(req,res) =>{
+    res.render('../views/user/userHome.pug',{
+        isLogged: true,
+        page:"Admin"
+    })
+  }
+
 
 
 
@@ -260,4 +267,4 @@ const emailChangePassword = async (req, res) => {
 //   }
 
 
-export { formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};
+export { userHome, formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};

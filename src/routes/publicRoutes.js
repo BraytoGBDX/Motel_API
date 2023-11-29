@@ -1,12 +1,18 @@
 import express from 'express';
 const router = express.Router();
 
-import { formLogin, publicHome, validateUser, adminHome } from '../controllers/publicController.js';
+import { formLogin, publicHome, validateUser } from '../controllers/publicController.js';
+// import { adminHome } from '../controllers/adminController.js';
+// import { userHome } from '../controllers/userController.js';
 
 router.get("/login", formLogin) //Login
-router.get('/adminHome', adminHome)
 router.get('/', publicHome);
 router.post("/login", validateUser) //Login funcional
+
+// router.get('/adminHome', adminHome); // Ruta para adminHome
+// router.get("/userHome", userHome)//Vista de cada usuario
+
+
 
 
 

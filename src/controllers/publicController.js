@@ -11,12 +11,9 @@ const formLogin = (request, response) => {
     })
 }
 
-const adminHome=(req,res) =>{
-  res.render('../views/admin/adminHome.pug',{
-      isLogged: true,
-      page:"Admin"
-  })
-}
+
+
+
 
 const publicHome = (req, res) => {
     
@@ -38,18 +35,18 @@ const validateUser = async (req, res) => {
   
         if (userExists.type == 'admin') {
           console.log("El admin existe");
-          res.redirect('/adminHome');
+          res.redirect('/admin/adminHome');
         
         
         
-        } else if (userExists) {
+        } else if (userExists.type == 'user') {
           console.log("El usuario existe");
           if (userExists.verified) {
             console.log("El usuario existe y está verificado");
             if (userExists.verifyPassword(password)) {
               console.log("La contraseña coincide");
               req.session.user = { nombre: email /* otras propiedades */ };
-              res.redirect('/userHome');
+              res.redirect('/user/userHome');
             } else {
               res.render("auth/login.pug", {
                 page: "Login",
@@ -89,4 +86,4 @@ const validateUser = async (req, res) => {
   };
   
 
-export {formLogin, publicHome, validateUser, adminHome}
+export {formLogin, publicHome, validateUser}

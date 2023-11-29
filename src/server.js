@@ -1,6 +1,7 @@
 import express, { urlencoded } from 'express';
 import userRoutes from './routes/userRoutes.js';
 import publicRoutes from './routes/publicRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 import db from './config/db.js';
 import helmet from 'helmet'; 
 import dotenv from 'dotenv';
@@ -57,3 +58,4 @@ catch{
 
 app.use('/user', userRoutes);
 app.use('/', publicRoutes)
+app.use('/admin', adminRoutes)
