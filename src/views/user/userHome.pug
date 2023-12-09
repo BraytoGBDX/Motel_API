@@ -1,5 +1,166 @@
-extends ../layout/index.pug
+extends ../layout/index
 
 block content
-  h1 Bienvenido, #{nombreUsuario}
-  a(href="/logout") Cerrar Sesión  // Puedes tener un enlace para cerrar sesión
+    .py-10.text-center.p-5.font-extrabold.text-xl
+        // Contenedor para el botón y el div de bienvenida
+        div.flex.flex-col.items-center
+        p.text-gray-800 Bienvenido a Motel Dos Caminos.
+        br
+        p.text-gray-500 Explora un poco nuestras habitaciones disponibles, con sus caracteristicas de cada uno y eligue la que desees.
+    div.flex.flex-row.flex-wrap
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-5xl.my-10.md-px-10.m-12
+            image(src="/img/hab5.jpeg").w-100.margin-left-8.object-center
+            br
+            p.text-black.font-extrabold.text-xl Habitacion 1
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+            br
+            div.flex.items-center
+                div.items-center.w-20
+                    img(src="img/reservacion-en-linea.png").flex.object-right
+                div.bg-green-200.items-center.text-xl.rounded-lg.py-2.px-10.ml-3
+                    p.text-black.flex.text-center.font-extrabold Disponible
+            br
+            a(href="/login" class="bg-green-500 hover:bg-green-300 text-white text-xl py-2 px-10 rounded-lg flex items-center justify-center") Reservar
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10
+            image(src="/img/hab6.jpeg").w-100.margin-left-0
+            br
+            p.text-black.font-extrabold.text-xl Habitacion 1
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+            br
+            div.flex.items-center
+                div.items-center.w-20
+                    img(src="img/reservacion-en-linea.png").flex.object-right
+                div.bg-green-200.items-center.text-xl.rounded-lg.py-2.px-10.ml-3
+                    p.text-black.flex.text-center.font-extrabold Disponible
+            br
+            a(href="/login" class="bg-green-500 hover:bg-green-300 text-white text-xl py-2 px-10 rounded-lg flex items-center justify-center") Reservar
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10.m-12
+            image(src="/img/hab5.jpeg").w-100.margin-left-0
+            br
+            p.text-black.font-extrabold.text-xl Habitacion 1
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+            br
+            div.flex.items-center
+                div.items-center.w-20
+                    img(src="img/reservacion-en-linea.png").flex.object-right
+                div.bg-green-200.items-center.text-xl.rounded-lg.py-2.px-10.ml-3
+                    p.text-black.flex.text-center.font-extrabold Disponible
+            br
+            a(href="/login" class="bg-green-500 hover:bg-green-300 text-white text-xl py-2 px-10 rounded-lg flex items-center justify-center") Reservar
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10
+            image(src="/img/hab4.jpeg").w-100.margin-left-0
+            br
+            p.text-black.font-extrabold.text-xl Habitacion 1
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+            br
+            div.flex.items-center
+                div.items-center.w-20
+                    img(src="img/reservacion-en-linea.png").flex.object-right
+                div.bg-green-200.items-center.text-xl.rounded-lg.py-2.px-10.ml-3
+                    p.text-black.flex.text-center.font-extrabold Disponible
+            br
+            a(href="/login" class="bg-green-500 hover:bg-green-300 text-white text-xl py-2 px-10 rounded-lg flex items-center justify-center") Reservar
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10.m-12
+            image(src="/img/hab5.jpeg").w-100.margin-left-0
+            br
+            p.text-black.font-extrabold.text-xl Habitacion 1
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+            br
+            div.flex.items-center
+                div.items-center.w-20
+                    img(src="img/reservacion-en-linea.png").flex.object-right
+                div.bg-green-200.items-center.text-xl.rounded-lg.py-2.px-10.ml-3
+                    p.text-black.flex.text-center.font-extrabold Disponible
+            br
+            a(href="/login" class="bg-green-500 hover:bg-green-300 text-white text-xl py-2 px-10 rounded-lg flex items-center justify-center") Reservar
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10
+            image(src="/img/hab6.jpeg").w-100.margin-left-0
+            br
+            p.text-black.font-extrabold.text-xl Habitacion 1
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+            br
+            div.flex.items-center
+                div.items-center.w-20
+                    img(src="img/reservacion-en-linea.png").flex.object-right
+                div.bg-green-200.items-center.text-xl.rounded-lg.py-2.px-10.ml-3
+                    p.text-black.flex.text-center.font-extrabold Disponible
+            br
+            a(href="/login" class="bg-green-500 hover:bg-green-300 text-white text-xl py-2 px-10 rounded-lg flex items-center justify-center") Reservar
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10.m-12
+            image(src="/img/hab4.jpeg").w-100.margin-left-0
+            br
+            p.text-black.font-extrabold.text-xl Habitacion 1
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+            br
+            div.flex.items-center
+                div.items-center.w-20
+                    img(src="img/reservacion-en-linea.png").flex.object-right
+                div.bg-green-200.items-center.text-xl.rounded-lg.py-2.px-10.ml-3
+                    p.text-black.flex.text-center.font-extrabold Disponible
+            br
+            a(href="/login" class="bg-green-500 hover:bg-green-300 text-white text-xl py-2 px-10 rounded-lg flex items-center justify-center") Reservar
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10
+            image(src="/img/hab5.jpeg").w-100.margin-left-0
+            br
+            p.text-black.font-extrabold.text-xl Habitacion 1
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+            br
+            div.flex.items-center
+                div.items-center.w-20
+                    img(src="img/reservacion-en-linea.png").flex.object-right
+                div.bg-green-200.items-center.text-xl.rounded-lg.py-2.px-10.ml-3
+                    p.text-black.flex.text-center.font-extrabold Disponible
+            br
+            a(href="/login" class="bg-green-500 hover:bg-green-300 text-white text-xl py-2 px-10 rounded-lg flex items-center justify-center") Reservar
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-auto.max-w-2xl.my-10.md-px-10.items-center
+            image(src="/img/estacionamiento.jpg").w-100.margin-left-0
+            br
+            p.text-gray-800
+                | Estacionamiento exclusivo para los clientes del motel.
