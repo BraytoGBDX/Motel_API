@@ -15,7 +15,7 @@ block content
                             p(class="mb-2 mt-3 text-white")= error.msg
         .mt-8.mx-auto.max-w-xl
             .bg-white.py-8.px-4.shadow-x1.rounded-lg.shadow-2xl
-                form.space-y-5(action="/login/register" method="POST" noValidate)
+                form.space-y-5(action="/user/register" method="POST" noValidate)
                     div
                         label.block.text-sm.uppercase.text-gray-700.mb-3.font-bold(for= "name") Name:
                         input#name.w-full.px-3.py-3.py-2.border.border-gray-300.rounded-sm.placeholder-gray-400(placeholder="Full Name" name="name" value=user && user.name ? user.name : '')

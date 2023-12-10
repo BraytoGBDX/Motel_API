@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import db from '../config/db.js'
 
-const Reservaciones = db.define('tbd_resevaciones',{
+const Reservaciones = db.define('tbd_reservaciones',{
     id:{
         type:DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,

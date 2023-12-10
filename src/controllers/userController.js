@@ -286,16 +286,19 @@ const userHome= async(req,res) =>{
   
       if (habitacionDisponible) {
         const reservacion = await Reservaciones.create({
-          tipoReserva,
-          fecha,
-          hora,
+          tipoReserva: tipoReserva,
+          fecha: fecha,
+          hora: hora,
           user_ID: loggedUser.id,
           room_ID: habitacionDisponible.id,
         });
+
+        habitacionDisponible.status=0;
+        habitacionDisponible.save()
   
         console.log(`Habitación reservada: ${habitacionDisponible.id}`);
   
-        res.render('user/historialReservacion');
+        res.redirect('historial');
       } else {
         // res.status(400).json({ error: 'No hay habitaciones disponibles con el tipo seleccionado' });
       }
@@ -307,4 +310,28 @@ const userHome= async(req,res) =>{
 
 
 
-export { userHome, saveReservation, reservacion, formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};
+  const historial = async (req, res) => {
+    try {
+      // Obtiene el ID del usuario a partir del token
+      const token = req.cookies._token;
+      const decoded = jsonWebToken.verify(token, process.env.JWT_SECRET_HASH_STRING);
+      const loggedUser = await User.findByPk(decoded.userID);
+  
+      // Busca las reservaciones asociadas al usuario
+      const historialReservaciones = await Reservaciones.findAll({
+        where: { user_ID: loggedUser.id },
+      });
+  
+      // Renderiza la vista con los datos obtenidos
+      res.render('user/historialReservacion', {
+         historialReservaciones,
+          loggedUser,
+          showHeader: true
+         });
+    } catch (error) {
+      console.error('Error al obtener el historial de reservaciones:', error.message);
+    }
+  };
+
+
+export { userHome,historial, saveReservation, reservacion, formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};
