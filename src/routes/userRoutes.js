@@ -1,5 +1,6 @@
 import express from 'express'
 import { userHome, formPasswordRecovery, formRegister, insertUser ,confirmAccount, formPasswordUpdate} from "../controllers/userController.js";
+import protectRoute from '../middlewares/middleware.js';
 
 
 

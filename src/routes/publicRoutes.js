@@ -1,10 +1,12 @@
 import express from 'express';
 const router = express.Router();
 
-import { formLogin, publicHome, validateUser } from '../controllers/publicController.js';
+import { formLogin, publicHome, validateUser,logout} from '../controllers/publicController.js';
 // import { adminHome } from '../controllers/adminController.js';
 // import { userHome } from '../controllers/userController.js';
 
+
+router.get('/logout', logout)
 router.get("/login", formLogin) //Login
 router.get('/', publicHome);
 router.post("/login", validateUser) //Login funcional

@@ -1,25 +1,27 @@
-import { DataType, DataTypes } from "sequelize"
+import {  DataTypes } from "sequelize"
 import db from '../config/db.js'
 
 const Rooms = db.define('tbc_rooms',{
-    
-    typeRoom: { //* tipo de habitación
-        type: DataTypes.STRING(20),
+    name:{
+        type:DataTypes.STRING(20),
+        allowNull:false,
+    },
+    type: { 
+        type: DataTypes.ENUM('Estandar','Suit'),
         allowNull: false
     },
-    description: { //* Descripcion
+    description: {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    image:{ //* Imagen
-        type: DataTypes.STRING(150),
+    status:{ 
+        type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: "Por definir"
+        defaultValue: 1
     },
-    price: {    //* precio de habitacones 
-        type: DataTypes.INTEGER,
+    price: {    
+        type: DataTypes.FLOAT,
         allowNull: false,
-        defaultValue:0   
     }
 })
 

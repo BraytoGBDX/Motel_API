@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-// import propertyRoutes from './routes/propertyRoutes.js'
+import {User, Reservaciones} from './models/relationships.js'
 
 
 

@@ -4,7 +4,7 @@ import db from '../config/db.js';
 import bcrypt from 'bcrypt';
 
 //* Modelo de la tabla users
-const user = db.define('tbb_users', {
+const User = db.define('tbb_users', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -20,7 +20,7 @@ const user = db.define('tbb_users', {
   },
   token: {
     type: DataTypes.STRING,
-    unique: true,
+    unique: false,
     defaultValue: '',
   },
   verified: {
@@ -41,10 +41,10 @@ const user = db.define('tbb_users', {
   },
 });
 
-user.prototype.verifyPassword = function (password) {
+User.prototype.verifyPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
 
 
-export default user
+export default User

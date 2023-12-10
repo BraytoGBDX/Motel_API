@@ -1,4 +1,5 @@
 import { check, validationResult } from "express-validator";
+import { generateJwt} from "../lib/tokens.js"
 import User from "../models/user.js";
 
 
@@ -28,14 +29,20 @@ const validateUser = async (req, res) => {
   
       let resultValidation = validationResult(req);
   
+
       if (resultValidation.isEmpty()) {
         const { email, password } = req.body;
         console.log(`El usuario: ${email} está intentando acceder a la plataforma`);
         const userExists = await User.findOne({ where: { email } });
-  
+        const token = generateJwt(userExists.id);
+
         if (userExists.type == 'admin') {
           console.log("El admin existe");
-          res.redirect('/admin/adminHome');
+
+          // const token = generateJwt(userExists.id);
+                    res.cookie('_token', token, {
+                        httpOnly: true,
+                    }).redirect('admin/adminHome');
         
         
         
@@ -45,8 +52,12 @@ const validateUser = async (req, res) => {
             console.log("El usuario existe y está verificado");
             if (userExists.verifyPassword(password)) {
               console.log("La contraseña coincide");
-              req.session.user = { nombre: email /* otras propiedades */ };
-              res.redirect('/user/userHome');
+              // const token = generateJwt(userExists.id);
+                    res.cookie('_token', token, {
+                        httpOnly: true,
+                    }).redirect('user/userHome');
+
+
             } else {
               res.render("auth/login.pug", {
                 page: "Login",
@@ -84,6 +95,11 @@ const validateUser = async (req, res) => {
       // Manejo de errores
     }
   };
+
+  const logout = (req,res) => {
+    res.clearCookie('_token')
+    res.redirect('/')
+  }
   
 
-export {formLogin, publicHome, validateUser}
+export {formLogin, publicHome, validateUser, logout}

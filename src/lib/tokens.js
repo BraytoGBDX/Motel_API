@@ -19,6 +19,4 @@ const generateJwt = (userID) =>
     })
 
 //module.exports(generateToken);
-export{
-    generateToken, generateJwt
-}
+export {generateToken, generateJwt}

@@ -5,12 +5,12 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Motel Dos Caminos | #{page}
         link(rel="icon", type="image/x-icon", href="/img/MotelLogo.png")
-        link(rel="stylesheet", href="/css/app.css")
         block styles 
+        link(rel="stylesheet", href="/css/app.css")
         script(src="/js/setTime.js") 
-
     body.mint-h-screen.bg-Fondo
-        include navbar
-        main(class="mx-auto container mrt-10 px2")
+        main(class="")
+            if showHeader 
+                include navbar
             block content
         block scripts 

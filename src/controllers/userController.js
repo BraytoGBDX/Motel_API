@@ -3,6 +3,7 @@ import { check, validationResult } from "express-validator";
 import { generateToken, generateJwt } from "../lib/tokens.js";
 import bcrypt from 'bcrypt';
 import { emailRegister, emailPasswordRecovery } from "../lib/emails.js";
+import  jsonWebToken  from "jsonwebtoken";
 
 
 
@@ -248,10 +249,15 @@ const emailChangePassword = async (req, res) => {
 }
 
 
-const userHome=(req,res) =>{
-    res.render('../views/user/userHome.pug',{
+const userHome= async(req,res) =>{
+    const token = req.cookies._token;
+    const decoded = jsonWebToken.verify(token, process.env.JWT_SECRET_HASH_STRING)
+    const loggedUser = await User.findByPk(decoded.userID)
+    res.render('user/userHome',{
+        showHeader: true,
         isLogged: true,
-        page:"Admin"
+        page:"User",
+        loggedUser
     })
   }
 

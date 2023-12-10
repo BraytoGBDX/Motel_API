@@ -1,5 +1,91 @@
-extends ../layout/index.pug
+extends ../layout/index
 
 block content
-  h1 Bienvenido, #{nombreUsuario}
-  a(href="/logout") Cerrar Sesión  // Puedes tener un enlace para cerrar sesión
+    .py-10.text-center.p-5.font-extrabold.text-xl
+        // Contenedor para el botón y el div de bienvenida
+        div.flex.flex-col.items-center
+        p.text-gray-800 Bienvenido a Motel Dos Caminos Disfruta de esta muestra de nosotros.
+        br
+        p.text-gray-500 Explora un poco nuestras habitaciones, con sus caracteristicas de cada uno.
+    div.flex.flex-row.flex-wrap
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10.m-12
+            image(src="/img/hab5.jpeg").w-100.margin-left-5
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10
+            image(src="/img/hab6.jpeg").w-100.margin-left-0
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10.m-12
+            image(src="/img/hab5.jpeg").w-100.margin-left-0
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10
+            image(src="/img/hab4.jpeg").w-100.margin-left-0
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10.m-12
+            image(src="/img/hab5.jpeg").w-100.margin-left-0
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10
+            image(src="/img/hab6.jpeg").w-100.margin-left-0
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10.m-12
+            image(src="/img/hab4.jpeg").w-100.margin-left-0
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-15.max-w-2xl.my-10.md-px-10
+            image(src="/img/hab5.jpeg").w-100.margin-left-0
+            br
+            p.text-gray-800 
+                | Habitacion uno con su espacio 
+                br
+                | de estacionamiento propio,
+                br
+                | cuenta con un tubo para poldance.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-auto.max-w-2xl.my-10.md-px-10.items-center
+            image(src="/img/estacionamiento.jpg").w-100.margin-left-0
+            br
+            p.text-gray-800
+                | Estacionamiento exclusivo para los clientes del motel.
+    div.bg-amber-500.shadow.py-5.px-5.rounded-xl.mx-auto.max-w-8xl.my-10.md-px-10.m-12
+        image(src="/img/serHab.png").w-20
+            p.text-white.text-center Informacion del servicio a la habitacion.
+        div.bg-white.shadow.py-5.px-5.rounded-xl.mx-auto.max-w-6xl.my-10.md-px-10
