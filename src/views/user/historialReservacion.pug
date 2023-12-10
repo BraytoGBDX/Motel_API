@@ -1,29 +1,23 @@
 extends ../layout/index
 
-block styles  
-    style.
-        #myTable_info, #myTable_paginate {
-        font-size: 0.75rem;  // Ajusta el tamaño de letra según tus preferencias
-        }
-        .dataTables_filter input {
-             font-size: 0.75rem;  // Ajusta el tamaño de letra del campo de búsqueda
-            }
-
-block content 
-    nav(class="bg-amber-500 border p-2 font-extrabolder h-30 text-xl")
-        p#msg.text-white.text-center.py-10 Bienvenido #{loggedUser.name} 
-
-    .bg-white.shadow.py-8.px-4.rounded-xl.mx-auto.max-w-full.my-10.text-center.font-extrabold.space-y-5(class="md:px-10 text-lg") 
-        p Historial de Reservaciones
-
-        each reservacion in historialReservaciones
-            li
-                div(class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 gap-4")
-                div(class="sm:w-2/3 md:w-3/4 lg:w-5/6")
-                    p(class="text-sm text-black font-bold")= `Fecha: ${reservacion.fecha.toLocaleDateString()}, Hora: ${reservacion.hora}, Tipo: ${reservacion.tipoReserva}, Habitacion: ${reservacion.room_ID}`
-                div(class="sm:w-1/3 md:w-1/4 lg:w-1/6")
-                    form(action=`/user/eliminarReservacion/${reservacion.id}`, method="POST")
-                        input(type="hidden", name="_method", value="DELETE")
-                        button(class="bg-red-500 text-white py-2 px-4 rounded-full",type="submit") Eliminar
-        else    
-          p.text-center No hay reservaciones.
+block content
+    h2(class="text-2xl font-bold mb-4 text-center").mt-5 Reservación de Habitación
+    div(class="container mx-auto my-8 bg-white py-4 px-4 shadow-xl rounded-lg").w-96
+      form(action="/user/reservacion", method="post", class="mx-auto max-w-md")
+        div
+          label(class="block text-gray-700 text-sm font-bold mb-2") Tipo de Habitación
+          select(name="tipoHabitacion", class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300")
+            option(value="Estandar") Estandar
+            option(value="Suit") Suit
+        div
+          label(class="block text-gray-700 text-sm font-bold mb-2") Tipo de Reserva
+          select(name="tipoReserva", class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300")
+            option(value="publica") Pública
+            option(value="anonima") Anónima
+        div
+          label(class="block text-gray-700 text-sm font-bold mb-2") Fecha
+          input(type="date", name="fecha", class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300")
+        div
+          label(class="block text-gray-700 text-sm font-bold mb-2") Hora
+          input(type="time", name="hora", class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300")
+        button(type="submit", class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4") Realizar Reserva
