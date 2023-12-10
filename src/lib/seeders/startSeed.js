@@ -6,7 +6,6 @@ import admin from './adminSeed.js'
 import db from '../../config/db.js'
 
 
-
 const importData = async () => {
     try{
         //Autenticar
@@ -21,7 +20,6 @@ const importData = async () => {
         console.log(err)
         exit(1);
     }
-
 }
 
 if(process.argv[2] === "-i"){
@@ -30,9 +28,9 @@ if(process.argv[2] === "-i"){
 
 const deleteData = async () => {
     try{
-        const queryResetRooms = "ALTER TABLE tbc_categories AUTO_INCREMENT = 1;"
         const queryResetAdmin = "DELETE FROM `motel_dos_caminos`.`tbb_users` WHERE (`id` = '1');;"     
      
+        const queryResetRooms = "ALTER TABLE tbc_rooms AUTO_INCREMENT = 1;"     
         await Promise.all([Rooms.destroy({
             where:{},
             truncate:false

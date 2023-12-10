@@ -22,6 +22,7 @@ const Rooms = db.define('tbc_rooms',{
     price: {    
         type: DataTypes.FLOAT,
         allowNull: false,
+
     }
 })
 

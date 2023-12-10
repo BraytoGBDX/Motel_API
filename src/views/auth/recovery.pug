@@ -1,0 +1,26 @@
+extends ../layout/index 
+block content 
+    div.py-10 
+        h1.text-center.text-4xl.my-10.font-extrabold.text-orange-700 Real 
+            span.font-normal.text-black Estate 
+        h2.text-center.text-3xl.font-extrabold= page 
+
+        if errors 
+            div#message.mt-8.mx-auto.max-w-xl(class="text-center time")
+                div.text-center(class="bg-red-500 text-white uppercase font-bold rounded-t px-6 py-2 mt-1 max-w-2xl") Warning
+                            
+                    div.bg-red-600.text-white.uppercase.text-xs.text-center.p-4.mb-2.font-bold(class="border border-t-0 border-red-400 rounded-b bg-red-100 px-6 py-4 text-red-700 max-w-2xl")
+                        each error in errors 
+                            p(class="bg-red-600 text-white uppercase text-sm text-center p-4 mb-2 font-bold rounded")=error.msg
+        .mt-8.mx-auto.max-w-xl
+            .bg-white.py-8.px-4.shadow-x1.rounded-lg.shadow-2xl
+                form.space-y-5(action="" method="POST" noValidate)
+                    div
+                        label.block.text-sm.uppercase.text-gray-700.mb-3.font-bold(for= "email") email:
+                        input#email.w-full.px-3.py-2.border.border-gray-300.rounded-sm.place-holder-gray-400(placeholder="user@domain.com" name="email" type="email")
+                    
+                    input#btn-login.w-full.bg-orange-500.text-white(class="text-gray-800 font-bold py-3 cursor-pointer bg-cyan-600 rounded-xl hover:bg-cyan-600 hover:text-white" type="submit" value="Send an email")
+
+                    div.flex.items-center.justify-between.pt-5
+                        a.text-sm.text-gray-800(href="/login/register" class="hover:underline decoration-4 decoration-sky-600 ") If u dont have an account, Register
+                        a.text-sm.text-gray-800(href="/login" class="hover:underline decoration-4 decoration-sky-600 ") Do you?, Login

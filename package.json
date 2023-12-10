@@ -6,10 +6,11 @@
   "type": "module",
   "scripts": {
     "server": "nodemon src/server.js",
+    "js": "webpack --watch",
+    "dev": "concurrently \"npm run css\" \"npm run js\"",
     "css": "postcss src/public/css/tailwind.css -o src/public/css/app.css --watch",
     "db:importData": "node ./src/lib/seeders/startSeed.js -i",
     "db:deleteData": "node ./src/lib/seeders/startSeed.js -d"
-
   },
   "repository": {
     "type": "git",
@@ -34,10 +35,12 @@
     "nodemon": "^3.0.1",
     "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
-    "tailwindcss": "^3.3.5"
+    "tailwindcss": "^3.3.5",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express-session": "^1.17.3",
@@ -49,6 +52,7 @@
     "nodemailer": "^6.9.7",
     "pug": "^3.0.2",
     "sequelize": "^6.35.0",
-    "toposort-class": "^1.0.1"
+    "toposort-class": "^1.0.1",
+    "webpack": "^5.89.0"
   }
 }

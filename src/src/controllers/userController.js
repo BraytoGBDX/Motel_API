@@ -4,8 +4,6 @@ import { generateToken, generateJwt } from "../lib/tokens.js";
 import bcrypt from 'bcrypt';
 import { emailRegister, emailPasswordRecovery } from "../lib/emails.js";
 import  jsonWebToken  from "jsonwebtoken";
-import Reservaciones from "../models/reservaciones.js";
-import Rooms from "../models/rooms.js";
 
 
 
@@ -263,48 +261,16 @@ const userHome= async(req,res) =>{
     })
   }
 
-  const reservacion = (req,res) =>{
-    res.render('user/reservacion',{
-        showHeader: true,
-    })
-  }
-
-  const saveReservation = async (req, res) => {
-
-    const token = req.cookies._token;
-    const decoded = jsonWebToken.verify(token, process.env.JWT_SECRET_HASH_STRING)
-    const loggedUser = await User.findByPk(decoded.userID)
-    const { tipoReserva, fecha, hora, tipoHabitacion } = req.body;
-  
-    try {
-      const habitacionDisponible = await Rooms.findOne({
-        where: {
-          type: tipoHabitacion,
-          status: 1,
-        },
-      });
-  
-      if (habitacionDisponible) {
-        const reservacion = await Reservaciones.create({
-          tipoReserva,
-          fecha,
-          hora,
-          user_ID: loggedUser.id,
-          room_ID: habitacionDisponible.id,
-        });
-  
-        console.log(`Habitación reservada: ${habitacionDisponible.id}`);
-  
-        res.render('user/historialReservacion');
-      } else {
-        // res.status(400).json({ error: 'No hay habitaciones disponibles con el tipo seleccionado' });
-      }
-    } catch (error) {
-      console.error('Error al guardar la reservación:', error.message);
-      res.status(500).json({ error: 'Error al procesar la reservación' });
-    }
-  };
 
 
 
-export { userHome, saveReservation, reservacion, formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};
+
+
+// const publicHome = (req, res) => {
+    
+//       res.render('templates/publicHome.pug');
+    
+//   }
+
+
+export { userHome, formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};

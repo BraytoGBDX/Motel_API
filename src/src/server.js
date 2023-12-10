@@ -23,10 +23,14 @@ app.use(express.urlencoded({
 }));
 
 // HABILITAR COOKIEPARSER PARA LEER, ESCRIBIR Y ELIMINAR EN LAS COOKIES DEL NAVEGADOR.
-app.use(cookieParser(process.env.COOKIE_SECRET, {
-    cookie: true
-}));
+const secretKey = 'tu_clave_secreta_aqui'; // Cambia esto por una clave segura
+app.use(cookieParser(secretKey));
 
+app.use(session({
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: true,
+}));
 
 
 //TEMPLATE ENGINE
@@ -35,15 +39,7 @@ app.set('views', './src/views');
 app.use(express.static('./src/public'));
 
 // HABILITAR LA PROTECCION A TRAVES DE HELMET
-app.use(helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", 'https://unpkg.com', 'https://cdnjs.cloudflare.com', "'unsafe-eval'"],
-      styleSrc: ["'self'", 'https://unpkg.com', 'https://cloudflare.com', 'https://cdnjs.cloudflare.com'],
-      imgSrc: ["'self'", 'data:', 'https://unpkg.com', 'https://cloudflare.com', 'https://cdnjs.cloudflare.com', 'https://a.tile.openstreetmap.org', 'https://b.tile.openstreetmap.org', 'https://c.tile.openstreetmap.org'],
-      connectSrc: ["'self'", 'https://tile-provider-domain.com', 'https://geocode.arcgis.com'],
-    },
-  }));
+app.use(helmet());
 
 app.listen(process.env.SERVER_PORT, (request, response) => {
     console.log(`EL servicio HTTP ha sido iniciado... \n  El servicio esta escuchando por el puerto: ${process.env.SERVER_PORT}`)

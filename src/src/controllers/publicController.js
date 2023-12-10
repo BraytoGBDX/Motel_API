@@ -17,8 +17,8 @@ const formLogin = (request, response) => {
 
 
 const publicHome = (req, res) => {
- 
-    res.render('auth/publicHome.pug');
+    
+    res.render('templates/publicHome.pug');
   
 }
 

@@ -12,3 +12,4 @@ Rooms.hasOne(Reservaciones, {
 })
 
 export{User, Reservaciones}
+

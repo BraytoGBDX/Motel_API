@@ -1,0 +1,17 @@
+header.bg-yellow-900.p-4
+    .container.mx-auto.flex.flex-wrap.justify-between.items-center
+        h1.text-2xl.text-white.font-extrabold.text-center(class="text-black-700") Motel
+            span.font-normal.text-black-900 Dos Caminos
+        nav(class="my-5 text-sm md:flex md:items-center md:gap-3 font-bold text-white flex flex-wrap")
+            button(id="menuBtn" class="block md:hidden text-white")
+                span(class="block h-2 w-6 bg-white mb-1")
+                span(class="block h-2 w-6 bg-white mb-1")
+                span(class="block h-2 w-6 bg-white")
+
+            div(class="hidden md:flex flex-wrap items-center", id="navLinks" style="position: absolute; top: 60px; left: 0; background-color: #f3f4f6; width: 100%; padding: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);")
+                a(href="/properties/create" class="bg-yellow-700 py-2 px-8 md:px-10 rounded-lg hover:bg-yellow-600 mb-2 md:mb-0 mr-4") Crear Reservacion 
+                a(href="" class="bg-yellow-700 py-2 px-8 md:px-10 rounded-lg hover:bg-yellow-600 mb-2 md:mb-0 mr-4") Perfil
+                a(href="" class="bg-yellow-700 py-2 px-8 md:px-10 rounded-lg hover:bg-yellow-600 mb-2 md:mb-0 mr-4") Servicio a la habitacion
+                a(href="/logout" class="bg-yellow-700 py-2 px-8 md:px-10 rounded-lg hover:bg-yellow-600 mb-2 md:mb-0") Cerrar sesion
+
+script(src="/js/scripts.js")

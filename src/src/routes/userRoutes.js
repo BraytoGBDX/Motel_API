@@ -1,5 +1,5 @@
 import express from 'express'
-import { userHome, saveReservation, reservacion, formPasswordRecovery, formRegister, insertUser ,confirmAccount, formPasswordUpdate} from "../controllers/userController.js";
+import { userHome, formPasswordRecovery, formRegister, insertUser ,confirmAccount, formPasswordUpdate} from "../controllers/userController.js";
 import protectRoute from '../middlewares/middleware.js';
 
 
@@ -14,8 +14,6 @@ router.get("/update-password/:token", formPasswordUpdate); //Comprobar token
 // router.get('/home', home);
 
 router.get("/userHome", userHome)//Vista de cada usuario
-router.get("/reservacion", reservacion)
-router.post("/reservacion",saveReservation)
 
 
 

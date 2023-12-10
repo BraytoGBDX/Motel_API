@@ -17,7 +17,7 @@ const Reservaciones = db.define('tbd_resevaciones',{
         allowNull: false
     },
     hora:{ //* Imagen
-        type: DataTypes.TIME,
+        type: DataTypes.STRING(),
         allowNull: false,
     },
     codigo: {    //* precio de habitacones 
