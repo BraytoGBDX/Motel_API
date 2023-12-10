@@ -6,6 +6,7 @@ import db from './config/db.js';
 import helmet from 'helmet'; 
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import methodOverride from 'method-override';
 import session from 'express-session';
 import {User, Reservaciones} from './models/relationships.js'
 
@@ -16,11 +17,19 @@ dotenv.config({
     path:'src/.env'
 })
 
+
+
 //*Instanciamos el modulo
 const app = express();
+
+
+
 app.use(express.urlencoded({
     extended:false 
 }));
+
+
+app.use(methodOverride('_method'));
 
 // HABILITAR COOKIEPARSER PARA LEER, ESCRIBIR Y ELIMINAR EN LAS COOKIES DEL NAVEGADOR.
 app.use(cookieParser(process.env.COOKIE_SECRET, {

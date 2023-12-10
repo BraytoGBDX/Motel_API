@@ -16,13 +16,14 @@ block content
     .bg-white.shadow.py-8.px-4.rounded-xl.mx-auto.max-w-full.my-10.text-center.font-extrabold.space-y-5(class="md:px-10 text-lg") 
         p Historial de Reservaciones
 
-        if historialReservaciones && historialReservaciones.length
-          div(class="bg-white shadow rounded-lg")
-            div(class="divide-y divide-gray-200")
-              each reservacion in historialReservaciones
-                li
-                  div(class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 gap-4")
-                    div(class="sm:w-2/3 md:w-3/4 lg:w-5/6")
-                      p(class="text-sm text-black font-bold")= `Fecha: ${reservacion.fecha.toLocaleDateString()}, Hora: ${reservacion.hora}, Tipo: ${reservacion.tipoReserva}, Habitacion: ${reservacion.room_ID}`
+        each reservacion in historialReservaciones
+            li
+                div(class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 gap-4")
+                div(class="sm:w-2/3 md:w-3/4 lg:w-5/6")
+                    p(class="text-sm text-black font-bold")= `Fecha: ${reservacion.fecha.toLocaleDateString()}, Hora: ${reservacion.hora}, Tipo: ${reservacion.tipoReserva}, Habitacion: ${reservacion.room_ID}`
+                div(class="sm:w-1/3 md:w-1/4 lg:w-1/6")
+                    form(action=`/user/eliminarReservacion/${reservacion.id}`, method="POST")
+                        input(type="hidden", name="_method", value="DELETE")
+                        button(class="bg-red-500 text-white py-2 px-4 rounded-full",type="submit") Eliminar
         else    
           p.text-center No hay reservaciones.

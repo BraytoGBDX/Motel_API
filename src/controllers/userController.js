@@ -228,8 +228,7 @@ const emailChangePassword = async (req, res) => {
             res.render('templates/message', {
                 page: 'Email Send',
                 message: `${email}`,
-                type: "success"
-
+                type: "success",
                 // button:'Now you can login',
 
             });
@@ -300,11 +299,15 @@ const userHome= async(req,res) =>{
   
         res.redirect('historial');
       } else {
-        // res.status(400).json({ error: 'No hay habitaciones disponibles con el tipo seleccionado' });
+        res.render('templates/msgUser.pug',{
+            page:"Ups... Lo sentimos",
+            button:"Volver al inicio",
+            error: true,
+            msg:"Por el momento no hay habitaciones disponibles"
+         })
       }
     } catch (error) {
       console.error('Error al guardar la reservación:', error.message);
-      res.status(500).json({ error: 'Error al procesar la reservación' });
     }
   };
 
@@ -333,5 +336,31 @@ const userHome= async(req,res) =>{
     }
   };
 
+  const eliminarReserva = async (req, res) => {
+    const reservacionId = req.params.id;
+  
+    try {
+      // Lógica para eliminar la reserva según el ID
+      await Reservaciones.destroy({
+        where: { id: reservacionId }
+      });
+  
+      // Envía una respuesta exitosa
+      res.render('templates/msgUser.pug',{
+        page:"Eliminacion correcta",
+        button:"Volver a Mis reservas",
+        error: false,
+        msg:"Se ha eliminado el registro correctamente"
+     })
+    } catch (error) {
+      console.error('Error al eliminar la reservación:', error.message);
+      res.status(500).json({ error: 'Error al eliminar la reservación' });
+    }
+  };
+  
 
-export { userHome,historial, saveReservation, reservacion, formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};
+
+  
+
+
+export { eliminarReserva,userHome,historial, saveReservation, reservacion, formLogin, formRegister, formPasswordRecovery, formPasswordUpdate, insertUser, confirmAccount, updatePassword, emailChangePassword};

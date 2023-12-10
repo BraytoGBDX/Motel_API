@@ -1,5 +1,5 @@
 import express from 'express'
-import { userHome, historial, saveReservation, reservacion, formPasswordRecovery, formRegister, insertUser ,confirmAccount, formPasswordUpdate} from "../controllers/userController.js";
+import { userHome,eliminarReserva, historial, saveReservation, reservacion, formPasswordRecovery, formRegister, insertUser ,confirmAccount, formPasswordUpdate} from "../controllers/userController.js";
 import protectRoute from '../middlewares/middleware.js';
 
 
@@ -16,6 +16,9 @@ router.get("/userHome", userHome)//Vista de cada usuario
 router.get("/reservacion", reservacion)
 router.post("/reservacion",saveReservation)
 router.get("/historial",historial)
+router.post('/eliminarReservacion/:id', eliminarReserva);
+
+
 
 
 export default router;
