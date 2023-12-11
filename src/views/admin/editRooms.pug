@@ -1,0 +1,17 @@
+extends ../layout/indexAdmin
+
+block content
+  h2(class="text-2xl font-bold mb-4 text-center mt-5") Editar Precio y Estado de Habitación
+  div(class="container mx-auto my-8 bg-white py-4 px-4 shadow-xl rounded-lg w-96")
+    form(action=`/admin/editRooms/${room.id}`, method="POST", class="mx-auto max-w-md")
+      div
+        label(class="block text-gray-700 text-sm font-bold mb-2") Nuevo Precio
+        input(type="number" name="newPrice" value=`${room.price}` class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300" required)
+
+      div
+        label(class="block text-gray-700 text-sm font-bold mb-2") Nuevo Estado
+        select(name="newStatus" Value=`${room.status}` class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300" required)
+            option(value="1" selected=room.status == 1) Activo
+            option(value="0" selected=room.status == 0) Inactivo
+
+      button(type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4") Guardar Cambios

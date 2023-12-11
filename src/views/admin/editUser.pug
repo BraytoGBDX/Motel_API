@@ -1,0 +1,18 @@
+extends ../layout/indexAdmin
+
+block content
+  h2(class="text-2xl font-bold mb-4 text-center mt-5") Editar Usuario
+  div(class="container mx-auto my-8 bg-white py-4 px-4 shadow-xl rounded-lg w-96")
+    form(action=`/admin/editUser/${user.id}`, method="POST", class="mx-auto max-w-md")
+      div
+        label(class="block text-gray-700 text-sm font-bold mb-2") Nuevo Tipo
+        select(name="newVerified" class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300" required)
+          option(value="user" selected=user.type == "user") Usuario
+          option(value="admin" selected=user.type == "admin") Administrador
+      div
+        label(class="block text-gray-700 text-sm font-bold mb-2") Nuevo Estado
+        select(name="newVerified" class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300" required)
+          option(value="1" selected=user.verified == 1) Verificado
+          option(value="0" selected=user.verified == 0) No verificado
+
+      button(type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4") Guardar Cambios

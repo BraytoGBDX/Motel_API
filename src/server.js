@@ -7,8 +7,7 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
-import path from 'path';
-
+import morgan from 'morgan';
 import {User, Reservaciones} from './models/relationships.js'
 
 
@@ -28,6 +27,8 @@ const app = express();
 app.use(express.urlencoded({
     extended:false 
 }));
+
+app.use(morgan('dev'));
 
 
 

@@ -32,9 +32,7 @@ block content
                         th(scope="col" class="px-6 py-3")
                             | Precio
                         th(scope="col" class="px-6 py-3")
-                            | Creado en
-                        th(scope="col" class="px-6 py-3")
-                            | Actualizado en
+                            | Editar
                 tbody
                     each room in rooms
                         tr
@@ -47,10 +45,11 @@ block content
                             td(class="px-6 py-4 whitespace-nowrap")
                                 | #{room.description}
                             td(class="px-6 py-4 whitespace-nowrap")
-                                | #{room.status === 1 ? 'Activo' : 'Inactivo'}
+                                | #{room.status == 1 ? 'Activo' : 'Inactivo'}
                             td(class="px-6 py-4 whitespace-nowrap")
                                 | #{room.price}
                             td(class="px-6 py-4 whitespace-nowrap")
-                                | #{room.createdAt}
-                            td(class="px-6 py-4 whitespace-nowrap")
-                                | #{room.updatedAt}
+                                a(href=`/admin/editRooms/${room.id}`, class="text-blue-500 hover:underline")
+                                    | Editar 
+                            
+
