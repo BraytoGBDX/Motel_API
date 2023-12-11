@@ -7,7 +7,8 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
-import session from 'express-session';
+import path from 'path';
+
 import {User, Reservaciones} from './models/relationships.js'
 
 
@@ -29,6 +30,8 @@ app.use(express.urlencoded({
 }));
 
 
+
+
 app.use(methodOverride('_method'));
 
 // HABILITAR COOKIEPARSER PARA LEER, ESCRIBIR Y ELIMINAR EN LAS COOKIES DEL NAVEGADOR.
@@ -41,7 +44,9 @@ app.use(cookieParser(process.env.COOKIE_SECRET, {
 //TEMPLATE ENGINE
 app.set('view engine', 'pug');
 app.set('views', './src/views');
-app.use(express.static('./src/public'));
+// app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static('src/public'));
 
 // HABILITAR LA PROTECCION A TRAVES DE HELMET
 app.use(helmet.contentSecurityPolicy({

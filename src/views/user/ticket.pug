@@ -1,0 +1,16 @@
+extends ../layout/index
+
+block content
+  h2(class="text-2xl font-bold mb-4 text-center").mt-5 Detalles de la Reserva
+  div(class="container mx-auto my-8 bg-white py-4 px-4 shadow-xl rounded-lg").w-96
+    div
+      label(class="block text-gray-700 text-sm font-bold mb-2") Monto Pagado
+      p(class="text-gray-800") #{ticketData.monto} USD
+    div
+      label(class="block text-gray-700 text-sm font-bold mb-2") Referencia
+      p(class="text-gray-800") #{ticketData.referencia}
+    div
+      label(class="block text-gray-700 text-sm font-bold mb-2") Código QR
+      img(src="img/qrs/imagenQR.png", alt="Código QR")
+
+  a(href="/user/userHome", class="block mt-4 bg-blue-500 text-white px-4 py-2 rounded-md text-center") Volver a la página principal

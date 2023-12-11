@@ -6,9 +6,11 @@ import { emailRegister, emailPasswordRecovery } from "../lib/emails.js";
 import  jsonWebToken  from "jsonwebtoken";
 import Reservaciones from "../models/reservaciones.js";
 import Rooms from "../models/rooms.js";
-
-
-
+import path from 'path';
+import QRCode from 'qrcode';
+import { promises as fs } from 'fs';
+import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 
 const formLogin = (request, response) => {
 
@@ -267,48 +269,134 @@ const userHome= async(req,res) =>{
     })
   }
 
-  const saveReservation = async (req, res) => {
+  // controllers/ticketController.js
 
+  function generarReferenciaToken() {
+    const referenciaAleatoria = crypto.randomBytes(16).toString('hex');
+    return referenciaAleatoria;
+  }
+
+const generarTicketYPago = async (monto, referencia, nombre, email) => {
+  try {
+    // Lógica para generar el código QR con información dinámica
+    const qrData = `Monto: ${monto}, Referencia: ${referencia}, Nombre: ${nombre}, Email: ${email}`;
+    const codigoQrBase64 = await QRCode.toDataURL(qrData);
+
+    // Otros detalles del ticket
+    const ticketData = {
+      monto,
+      referencia,
+      nombre,
+      email,
+      codigoQrBase64,
+    };
+
+    return ticketData;
+  } catch (error) {
+    console.error('Error al generar el código QR:', error);
+    throw error;
+  }
+};
+
+
+const saveReservation = async (req, res) => {
     const token = req.cookies._token;
-    const decoded = jsonWebToken.verify(token, process.env.JWT_SECRET_HASH_STRING)
-    const loggedUser = await User.findByPk(decoded.userID)
+    const decoded = jsonWebToken.verify(token, process.env.JWT_SECRET_HASH_STRING);
+    const loggedUser = await User.findByPk(decoded.userID);
     const { tipoReserva, fecha, hora, tipoHabitacion } = req.body;
   
     try {
       const habitacionDisponible = await Rooms.findOne({
         where: {
-          type: tipoHabitacion,
+          type: String(tipoHabitacion),
           status: 1,
         },
       });
   
       if (habitacionDisponible) {
+        // Obtener el precio de la habitación
+        const precioHabitacion = habitacionDisponible.price;
+  
+        // Crear la referencia y el código QR
+        const referencia = generarReferenciaToken();
+        const codigoQrBase64 = await generarCodigoQR(referencia);
+  
+        // Crear la reserva
         const reservacion = await Reservaciones.create({
           tipoReserva: tipoReserva,
           fecha: fecha,
           hora: hora,
           user_ID: loggedUser.id,
           room_ID: habitacionDisponible.id,
+          monto: precioHabitacion,
+          referencia: referencia,
+          codigoQrBase64: codigoQrBase64,
         });
-
-        habitacionDisponible.status=0;
-        habitacionDisponible.save()
+  
+        // Actualizar el estado de la habitación
+        habitacionDisponible.status = 0;
+        habitacionDisponible.save();
   
         console.log(`Habitación reservada: ${habitacionDisponible.id}`);
   
-        res.redirect('historial');
+        // Generar el ticket con el precio de la habitación
+        const ticketData = await generarTicketYPago(precioHabitacion, referencia, loggedUser.nombre, loggedUser.email);
+  
+        res.render('user/ticket', {
+          ticketData,
+          showHeader: true,
+        });
+
+        setTimeout(async () => {
+            habitacionDisponible.status = 1;
+            habitacionDisponible.save();
+            console.log(`Estado de la habitación restaurado: ${habitacionDisponible.id}`);
+          }, 180000);
       } else {
-        res.render('templates/msgUser.pug',{
-            page:"Ups...Lo sentimos",
-            button:"Volver al inicio",
-            error: true,
-            msg:"Por el momento no hay habitaciones disponibles"
-         })
+        res.render('templates/msgUser.pug', {
+          page: "Ups...Lo sentimos",
+          button: "Volver al inicio",
+          error: true,
+          msg: "Por el momento no hay habitaciones disponibles",
+        });
       }
     } catch (error) {
       console.error('Error al guardar la reservación:', error.message);
     }
   };
+  
+  async function generarCodigoQR(texto) {
+    try {
+        // Configurar las opciones del código QR según tus necesidades
+        const opcionesQR = {
+          type: 'image/png', // Puedes ajustar el tipo de imagen según tus necesidades
+          quality: 0.9, // Puedes ajustar la calidad de la imagen
+          margin: 1,
+        };
+    
+        // Generar un nombre único para el archivo de imagen
+        const nombreImagen = `${uuidv4()}.png`;
+    
+        // Obtener la ruta completa para el archivo de imagen
+        const rutaDirectorio = './src/public/img/qr/';
+        const rutaImagenQR = path.join(rutaDirectorio, nombreImagen); // Ajusta la ruta según tus necesidades
+    
+        // Verificar si el directorio existe, si no, créalo
+        await fs.mkdir(rutaDirectorio, { recursive: true });
+    
+        // Generar el código QR como un buffer
+        const qrBuffer = await QRCode.toBuffer(texto, opcionesQR);
+    
+        // Guardar el buffer como un archivo de imagen
+        await fs.writeFile(rutaImagenQR, qrBuffer);
+    
+        return rutaImagenQR;
+      } catch (error) {
+        console.error('Error al generar el código QR como imagen:', error);
+        throw error;
+      }
+  }
+  
 
 
 
@@ -358,11 +446,8 @@ const userHome= async(req,res) =>{
   };
   
   const mostrarTicket = (req, res) => {
-    // Puedes obtener la información necesaria para el ticket desde la base de datos u otras fuentes.
     const ticketData = obtenerInformacionDelTicketSegunNecesidad();
-  
-    // Renderizar la vista de ticket
-    res.render('public/ticket', { ticketData });
+      res.render('public/ticket', { ticketData });
   };
 
 

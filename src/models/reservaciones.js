@@ -22,11 +22,6 @@ const Reservaciones = db.define('tbd_reservaciones', {
     type: DataTypes.TIME,
     allowNull: false,
   },
-  codigo: {
-    type: DataTypes.STRING(),
-    allowNull: false,
-    defaultValue: "Por definir"
-  },
   monto: { // Nuevo campo para almacenar el monto del ticket
     type: DataTypes.FLOAT,
     allowNull: false,
