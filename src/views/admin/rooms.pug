@@ -26,8 +26,6 @@ block content
                         th(scope="col" class="px-6 py-3")
                             | Tipo
                         th(scope="col" class="px-6 py-3")
-                            | Descripción
-                        th(scope="col" class="px-6 py-3")
                             | Estado
                         th(scope="col" class="px-6 py-3")
                             | Precio
@@ -42,8 +40,6 @@ block content
                                 | #{room.name}
                             td(class="px-6 py-4 whitespace-nowrap")
                                 | #{room.type}
-                            td(class="px-6 py-4 whitespace-nowrap")
-                                | #{room.description}
                             td(class="px-6 py-4 whitespace-nowrap")
                                 | #{room.status == 1 ? 'Activo' : 'Inactivo'}
                             td(class="px-6 py-4 whitespace-nowrap")

@@ -25,7 +25,8 @@ const User = db.define('tbb_users', {
   },
   verified: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false,
+    allowNull: false,
+    defaultValue: 0
   },
   type: {
     type: DataTypes.ENUM('user', 'admin'),

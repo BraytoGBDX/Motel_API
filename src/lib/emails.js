@@ -274,7 +274,7 @@ const emailPasswordRecovery = async (userData) => {
               </header>
               <p>Bienvenido a Motel Dos Caminos, ${name}.</p>
               <p>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta. Para continuar con el proceso de recuperación de contraseña, haz clic en el siguiente enlace:</p>
-              <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/login/update-password/${token}" class="button">Restablecer la contraseña</a>
+              <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/user/update-password/${token}" class="button">Restablecer la contraseña</a>
               <p>Atentamente....</p>
               <div class="signature">
                   <p style="text-align: center;">CBA</p>

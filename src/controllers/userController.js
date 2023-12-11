@@ -36,7 +36,7 @@ const formPasswordUpdate = async (request, response) => {
 
     response.render("auth/password-update", {
         isLogged: false,
-        page: "Actualizacion de Contrasena",
+        page: "Actualizacion de Contraseña",
 
     })
 }
@@ -52,7 +52,7 @@ const formRegister = (request, response) => {
 const formPasswordRecovery = (request, response) => {
 
     response.render("auth/recovery.pug", {
-        page: "Recuperar su Contrasena",
+        page: "Recuperar su Contraseña",
 
     })
 }

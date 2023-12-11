@@ -144,18 +144,27 @@ const updateUser = async (req, res) => {
 
     // Actualiza el tipo y el verificado del usuario
     user.type = newType;
-    user.verified = newVerified;
+
+    // Convierte el valor de newVerified a un número antes de asignarlo
+// Convierte el valor de newVerified a un número antes de asignarlo
+  user.verified = parseInt(newVerified, 10);
 
     // Si se está cambiando a verificado y existe un token, elimina el token
-    if (newVerified === 1 && user.token) {
+    if (user.verified === 1 && user.token) {
       user.token = null;
+
+    }
+
+    if (user.verified === 0 && !user.token) {
+        user.verified = parseInt(newVerified, 10);
+
     }
 
     // Guarda los cambios en la base de datos
     await user.save();
 
     // Redirecciona a la página de control de usuarios o a otra página que desees
-    res.redirect('/admin/users');
+    res.redirect('/admin/adminHome');
   } catch (error) {
     console.error('Error al editar el usuario:', error);
     res.status(500).render('templates/error.pug', {
@@ -164,6 +173,7 @@ const updateUser = async (req, res) => {
     });
   }
 };
+
 
 // En tu archivo de controladores (adminController.js)
 const editUser = async (req, res) => {
