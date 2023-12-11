@@ -1,9 +1,9 @@
 extends ../layout/index
 
 block content
-  div(class="container mx-auto my-8")
-    h2(class="text-2xl font-bold mb-4") Reservación de Habitación
-    form(action="/user/reservacion", method="post" class="mx-auto max-w-md")
+  h2(class="text-2xl font-bold mb-4 text-center").mt-5 Reservación de Habitación
+  div(class="container mx-auto my-8 bg-white py-4 px-4 shadow-xl rounded-lg").w-96
+    form(action="/user/reservacion", method="post", class="mx-auto max-w-md", enctype="multipart/form-data")
       div
         label(class="block text-gray-700 text-sm font-bold mb-2") Tipo de Habitación
         select(name="tipoHabitacion" class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300")
@@ -22,5 +22,8 @@ block content
       div
         label(class="block text-gray-700 text-sm font-bold mb-2") Hora
         input(type="time" name="hora" class="block w-full px-4 py-2 border rounded-md bg-white focus:outline-none focus:ring focus:border-blue-300")
-        
+      
+      // Campo oculto solo si ticketData está definido
+      if ticketData
+        input(type="hidden", name="codigoQrBase64", value= ticketData.codigoQrBase64)
       button(type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4") Realizar Reserva

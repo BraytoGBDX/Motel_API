@@ -2,17 +2,18 @@ extends ../layout/index
 block content
 
     div.py-10
-        h1.text-center.text-4xl.my-10.font-extrabold.text-black Real
-            span.font-normal.text-black Estate
-        h2.text-center.text-3xl.font-extrabold= page
+        h1.text-center.text-4xl.my-10.font-extrabold(class="text-black-700") Motel 
+            span.font-normal.text-black Dos 
+            span.text-center.text-4xl.my-10.font-extrabold(class="text-black-700") Caminos
+        h2.text-center.text-3xl.font-extrabold= page 
 
-        if errors
-            div#message.mt-8.mx-auto.max-w-xl
-                div(class="p-4 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert")
-                    span(class="flex rounded-full bg-indigo-500 uppercase px-4 py-2 text-sm font-bold mr-4") Danger
-                    div(class="font-semibold mr-4 text-left flex-auto")
-                        each error in errors
-                            p(class="mb-2 mt-3 text-white")= error.msg
+        if errors 
+            div#message.mt-8.mx-auto.max-w-xl(class="text-center time")
+                div.text-center(class="bg-red-500 text-white uppercase font-bold rounded-t px-4 mt-1 max-w-xl") Cuidado
+                
+                div.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold(class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700  max-w-xl" )
+                    each error in errors 
+                        p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg
         .mt-8.mx-auto.max-w-xl
             .bg-white.py-8.px-4.shadow-x1.rounded-lg.shadow-2xl
                 form.space-y-5(action="/user/register" method="POST" noValidate)
@@ -30,8 +31,8 @@ block content
                         label.block.text-sm.uppercase.text-gray-700.mb-3.font-bold(for= "repeatPassword" type="password") Repeat password:
                         input#confirmPassword.w-full.px-3.py-3.py-2.border.border-gray-300.rounded-sm.placeholder-gray-400(placeholder="Reenter password" name="confirmPassword" type="password")
 
-                    input#btn-login.w-full.bg-cyan-500.text-white(class="text-gray-800 font-bold py-3 cursor-pointer bg-blue-600 rounded-xl hover:bg-emerald-500 hover:text-white" type="submit" value="Register" required)
+                    input#btn-login.w-full.bg-cyan-500.text-white(class="text-gray-800 font-bold py-3 cursor-pointer bg-yellow-900 rounded-xl hover:bg-yellow-600 hover:text-white" type="submit" value="Registrar" required)
 
                     div.flex.items-center.justify-between.pt-5
-                        a.text-sm.text-gray-800(href="/login/" class="hover:underline decoration-4 decoration-sky-600 ") Do you have an account? Login
-                        a.text-sm.text-gray-800(href="/login/password-recovery" class="hover:underline decoration-4 decoration-sky-600 ") Forgot your password? Recover it
+                        a.text-sm.text-gray-800(href="/login/" class="hover:underline decoration-4 decoration-orange-600") Ya tienes cuenta? Accede.
+                        a.text-sm.text-gray-800(href="/login/password-recovery" class="hover:underline decoration-4 decoration-orange-600 ") Olvidaste tu contrasena, recuperala.

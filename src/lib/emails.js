@@ -17,7 +17,7 @@ const emailRegister = async (userData) => {
     console.log(`Intentando enviar un correo electronico de activación al usuario ${email}`)
     //* ENVIANDO  EL  CORREO 
     await transport.sendMail({
-      from:'220606@utxicotepec.edu.mx', //Emitente
+      from:'CBA@utxicotepec.edu.mx', //Emitente
       to:email, //Destinatario
       subject: "Model Dos Caminos: Verificación.", //Asunto
       text:"Bienvenido a Motel Dos Caminos para continuar usando la plataforma por favor haz click en el boton de abajo para validar tu cuenta.", //Cuerpo
@@ -121,7 +121,7 @@ const emailPasswordRecovery = async (userData) => {
     console.log(`Intentando enviar un correo electronico dpara la recuperación de cuenta del usuario: ${email}`)
     //* ENVIANDO  EL  CORREO 
     await transport.sendMail({
-      from:'220606@utxicotepec.edu.mx', //Emitente
+      from:'CBA@utxicotepec.edu.mx', //Emitente
       to:email, //Destinatario
       subject: "Motel Dos Caminos: Recuperar contraseña.", //Asunto
       text:"Para actualizar tu contraseña por favor da click en el boton de abajo.", //Cuerpo
@@ -220,8 +220,30 @@ const emailPasswordRecovery = async (userData) => {
     })
 }
 
+export const sendQRCodeEmail = async ({ name, email, codigoQrBase64 }) => {
+  console.log(`Intentando enviar un correo electrónico con el código QR al usuario ${email}`);
+  // ENVIANDO EL CORREO
+  await transport.sendMail({
+      from: 'CBA@utxicotepec.edu.mx', // Emitente
+      to: email, // Destinatario
+      subject: 'Código QR de Reserva', // Asunto
+      html: `
+          <p>Hola ${name},</p>
+          <p>Tu reserva ha sido confirmada. Aquí está tu código QR:</p>
+          <img src="cid:codigoQr" alt="Código QR" />
+          <p>Gracias por usar nuestra aplicación.</p>
+      `,
+      attachments: [
+          {
+              filename: 'codigo-qr.png',
+              content: codigoQrBase64,
+              encoding: 'base64',
+              cid: 'codigoQr',
+          },
+      ],
+  });
+};
 
 
 
-export {emailRegister, emailPasswordRecovery}
-
+export { emailRegister, emailPasswordRecovery }
