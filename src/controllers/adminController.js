@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 import Rooms from '../models/rooms.js';
+import Reservaciones from "../models/reservaciones.js"
 
 import  jsonWebToken  from "jsonwebtoken";
 
@@ -35,6 +36,23 @@ const roomsview = async (req, res) => {
   }
 };
 
+const reservasview = async (req, res) => {
+  try {
+    const token = req.cookies._token;
+    const decoded = jsonWebToken.verify(token, process.env.JWT_SECRET_HASH_STRING)
+    const loggedUser = await User.findByPk(decoded.userID)
+    const reservacions = await Reservaciones.findAll();
+    res.render('admin/reservas', {  showHeader: true,
+        isLogged: true,
+        page:"Admin",
+        loggedUser,
+         reservacions });
+  } catch (error) {
+    console.error('Error al obtener las habitaciones:', error.message);
+    res.status(500).send('Error interno del servidor');
+  }
+};
 
 
-  export {adminHome,roomsview}
+
+  export {adminHome,roomsview,reservasview}
